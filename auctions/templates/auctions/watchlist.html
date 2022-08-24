@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% include "messages.html" %}
+
+<div class="container pb-5 mb-sm-1">
+  <h2>Watchlist</h2><hr>
+  <div class="row">
+    {% for item in new %}
+    <div class="col-md-4 col-sm-6">
+      <div class="card border-0 mb-grid-gutter">
+        <div class="card-body border mt-n1 py-4 text-center">
+          <a class="card-img-tiles" href="{% url 'detail' item.id%}">
+            <div class="main-img">
+              {% if item.picture %}
+              <img src="{{ item.picture.url }}" float="left" width="100px" height="100px" object-fit="cover">
+              {% endif %}
+            </div>
+          </a>
+              <br>
+          <h2 class="h5 mb-1">{{item.title}}</h2>
+          <span class="d-block mb-3 font-size-xs text-muted">Starting bid
+            <span class="font-weight-semibold">{{item.startingBid}} $<br>
+              <span class="font-weight-semibold">{{item.created_date}}
+              </span></span></span>
+              <a class="btn btn-pill btn-outline-primary btn-sm" href="{% url 'favourite_add' item.id%}">Remove</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+{% endblock %}
